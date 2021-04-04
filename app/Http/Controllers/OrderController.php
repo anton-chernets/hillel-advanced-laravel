@@ -42,10 +42,10 @@ class OrderController extends Controller
     /**
      * Display a total sum
      *
-     * @return int
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function getTotalSumByContractors(): int
+    public function getTotalSumByContractors(): \Illuminate\Http\JsonResponse
     {
-        return $this->model->totalSumContractorsOrders();
+        return response()->json(['total_sum' => $this->model->totalSumContractorsOrders()]);
     }
 }

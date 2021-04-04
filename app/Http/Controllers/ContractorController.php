@@ -23,7 +23,6 @@ class ContractorController extends Controller
      */
     public function getDuplicated(): \Illuminate\Http\Resources\Json\AnonymousResourceCollection
     {
-        return ContractorsResource::collection($this->model->duplicateContactors())
-        ;
+        return ContractorsResource::collection($this->model->duplicateContactors());
     }
 }
