@@ -2,41 +2,40 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\OrdersResource;
-use App\Models\Order;
+use App\Http\Resources\OrdersCollection;
 use App\Repositories\OrderRepository;
 
 class OrderController extends Controller
 {
-    protected $model;
+    protected $orderRepository;
 
     /**
-     * @param Order $order
+     * @param OrderRepository $orderRepository
      */
-    public function __construct(Order $order)
+    public function __construct(OrderRepository $orderRepository)
     {
-        $this->model = new OrderRepository($order);
+        $this->orderRepository = $orderRepository;
     }
 
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
+     * @return OrdersCollection
      */
-    public function getPaid(): \Illuminate\Http\Resources\Json\AnonymousResourceCollection
+    public function getPaid(): OrdersCollection
     {
-        return OrdersResource::collection($this->model->allPaid());
+        return new OrdersCollection($this->orderRepository->allPaid());
     }
 
     /**
      * Display a listing of the resource.
      *
      * @param $contractor_id
-     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
+     * @return OrdersCollection
      */
-    public function getByContractorId($contractor_id): \Illuminate\Http\Resources\Json\AnonymousResourceCollection
+    public function getByContractorId($contractor_id): OrdersCollection
     {
-        return OrdersResource::collection($this->model->allByContractor($contractor_id));
+        return new OrdersCollection($this->orderRepository->allByContractor($contractor_id));
     }
 
     /**
@@ -46,6 +45,11 @@ class OrderController extends Controller
      */
     public function getTotalSumByContractors(): \Illuminate\Http\JsonResponse
     {
-        return response()->json(['total_sum' => $this->model->totalSumContractorsOrders()]);
+        return response()->json([
+            'data' =>
+            [
+                'total_sum' => $this->orderRepository->totalSumContractorsOrders()
+            ]
+        ]);
     }
 }

@@ -2,27 +2,26 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\ContractorsResource;
-use App\Models\Contractor;
+use App\Http\Resources\ContractorsCollection;
 use App\Repositories\ContractorRepository;
 
 class ContractorController extends Controller
 {
-    protected $model;
+    protected $contractorRepository;
 
     /**
-     * @param Contractor $contractor
+     * @param ContractorRepository $contractorRepository
      */
-    public function __construct(Contractor $contractor)
+    public function __construct(ContractorRepository $contractorRepository)
     {
-        $this->model = new ContractorRepository($contractor);
+        $this->contractorRepository = $contractorRepository;
     }
 
     /**
      * Display a listing of the resource.
      */
-    public function getDuplicated(): \Illuminate\Http\Resources\Json\AnonymousResourceCollection
+    public function getDuplicated(): ContractorsCollection
     {
-        return ContractorsResource::collection($this->model->duplicateContactors());
+        return new ContractorsCollection($this->contractorRepository->duplicateContactors());
     }
 }

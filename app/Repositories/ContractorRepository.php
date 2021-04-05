@@ -2,20 +2,14 @@
 
 namespace App\Repositories;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Models\Contractor;
+use App\Repositories\Interfaces\RepositoryInterface;
 
 class ContractorRepository implements RepositoryInterface
 {
-    protected $model;
-
-    public function __construct(Model $model)
-    {
-        $this->model = $model;
-    }
-
     public function all()
     {
-        return $this->model->all();
+        return Contractor::all();
     }
 
     public function duplicateContactors()
