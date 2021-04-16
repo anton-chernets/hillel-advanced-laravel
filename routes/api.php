@@ -30,3 +30,7 @@ Route::prefix('orders')->group(function () {
     Route::get('get-by-contractor-id/{contractor_id}', [OrderController::class, 'getByContractorId']);
     Route::get('get-total-sum-by-contractors', [OrderController::class, 'getTotalSumByContractors']);
 });
+
+Route::prefix('reflection')->get('/get-name', function () {
+    return (new \ReflectionClass(Request::class))->getName();
+});
