@@ -19,6 +19,15 @@ class OrderRepository implements RepositoryInterface
     }
 
     /**
+     * @param $order_id
+     * @return Order
+     */
+    public function findById($order_id): Order
+    {
+        return Order::find($order_id);
+    }
+
+    /**
      * @param $contractor_id
      * @return mixed
      */
