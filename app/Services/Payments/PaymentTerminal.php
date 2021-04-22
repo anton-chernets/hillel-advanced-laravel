@@ -22,16 +22,6 @@ class PaymentTerminal
 
         $resultCheckSum = $this->checkSum($order->sum, $this->payment->payer_account);
 
-        if($this->payment instanceof PaymentCard)
-        {
-            //
-        }
-
-        if($this->payment instanceof PaymentCash)
-        {
-            //
-        }
-
         /* @var Payment $payment */
         $payment = Payment::create([
             'order_id' => $order->id,
