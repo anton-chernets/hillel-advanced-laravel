@@ -18,6 +18,6 @@ class PaymentCash extends PaymentBase
 
     public function doPayment(): bool
     {
-        return (new PaymentTerminal($this))->createPayment();
+        return (new PaymentTerminal())->createPayment($this);
     }
 }

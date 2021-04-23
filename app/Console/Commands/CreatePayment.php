@@ -5,8 +5,7 @@ namespace App\Console\Commands;
 
 
 use App\Services\Payments\PaymentBase;
-use App\Services\Payments\PaymentCard;
-use App\Services\Payments\PaymentCash;
+use App\Services\Payments\PaymentTerminal;
 use Illuminate\Console\Command;
 
 class CreatePayment extends Command
@@ -39,29 +38,23 @@ class CreatePayment extends Command
         $payment_type = $this->argument('type');
         $payer_account = $this->option('payer_account');
 
-        switch ($payment_type) {
-            case PaymentBase::TYPE_CARD:
-                if(is_null($payer_account)){
-                    $this->warn('Please enter payer account');
-                } else{
-                    $payment = (new PaymentCard($order_id, $payer_account));
-                }
-                break;
-            case PaymentBase::TYPE_CASH:
-                $this->info('Не забудьте взять у клиента деньги');
-                $payment = (new PaymentCash($order_id));
-                break;
-            default:
-                $payment = null;
-                $this->warn('Not defined payment type:' . PHP_EOL . $payment_type);
+        if($payment_type === PaymentBase::TYPE_CARD && is_null($payer_account)){
+            $this->warn('Please enter payer account');
+        }
+        if($payment_type === PaymentBase::TYPE_CASH){
+            $this->info('Не забудьте взять у клиента деньги');
         }
 
-        try {
-            $payment->doPayment()
-                ? $this->info('success')
-                : $this->info('decline');
-        } catch (\Throwable $exception) {
-            $this->warn($exception->getMessage());
+        $payment = (new PaymentTerminal())->initializePaymentByMethod($order_id, $payment_type, $payer_account,);
+
+        if($payment){
+            try {
+                $payment->doPayment() ? $this->info('success') : $this->info('decline');
+            } catch (\Throwable $exception) {
+                $this->warn($exception->getMessage());
+            }
+        } else{
+            $this->warn('Not defined payment type:' . PHP_EOL . $payment_type);
         }
     }
 }

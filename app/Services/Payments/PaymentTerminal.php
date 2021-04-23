@@ -9,24 +9,29 @@ use App\Repositories\OrderRepository;
 
 class PaymentTerminal
 {
-    public $payment;
-
-    public function __construct(PaymentBase $payment)
+    public function initializePaymentByMethod($order_id, $payment_type, $payer_account = null)
     {
-        $this->payment = $payment;
+        switch ($payment_type) {
+            case PaymentBase::TYPE_CARD:
+                return (new PaymentCard($order_id, $payer_account));
+            case PaymentBase::TYPE_CASH:
+                return (new PaymentCash($order_id));
+            default:
+                return null;
+        }
     }
 
-    public function createPayment(): bool
+    public function createPayment($payment): bool
     {
-        $order = (new OrderRepository())->findById($this->payment->order_id);
+        $order = (new OrderRepository())->findById($payment->order_id);
 
-        $resultCheckSum = $this->checkSum($order->sum, $this->payment->payer_account);
+        $resultCheckSum = $this->checkSum($order->sum, $payment->payer_account);
 
         /* @var Payment $payment */
         $payment = Payment::create([
             'order_id' => $order->id,
-            'type' => $this->payment->type,
-            'payer_account' => $this->payment->payer_account,
+            'type' => $payment->type,
+            'payer_account' => $payment->payer_account,
         ]);
 
         return $payment->update(['paid' => $resultCheckSum]);
