@@ -12,7 +12,9 @@ use Illuminate\Database\Eloquent\Model;
  *
  * @property int $id
  * @property int $paid
+ * @property string $type
  * @property int $order_id
+ * @property string $payer_account
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Models\Order $order
@@ -24,6 +26,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|Payment whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Payment whereOrderId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Payment wherePaid($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Payment wherePayerAccount($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Payment whereType($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Payment whereUpdatedAt($value)
  * @mixin \Eloquent
  */
@@ -39,6 +43,8 @@ class Payment extends Model
     protected $fillable = [
         'paid',
         'order_id',
+        'type',
+        'payer_account',
     ];
 
     /**

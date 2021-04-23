@@ -29,6 +29,8 @@ class PaymentFactory extends Factory
         return [
             'paid' => $this->faker->boolean,
             'order_id' => $this->faker->randomElement($orders),
+            'type' => $this->faker->randomElement(['card','cash']),
+            'payer_account' => $this->faker->numberBetween('1111111111', '2147483647'),
         ];
     }
 
