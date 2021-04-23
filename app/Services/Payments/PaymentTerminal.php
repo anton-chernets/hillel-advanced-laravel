@@ -17,7 +17,7 @@ class PaymentTerminal
             case PaymentBase::TYPE_CASH:
                 return (new PaymentCash($order_id));
             default:
-                return null;
+                throw new \RuntimeException('not available type');
         }
     }
 

@@ -16,7 +16,7 @@ class PaymentCash extends PaymentBase
         $this->payer_account = $this->cashier_account;
     }
 
-    public function doPayment(): bool
+    public function makePayment(): bool
     {
         return (new PaymentTerminal())->createPayment($this);
     }

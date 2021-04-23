@@ -45,16 +45,11 @@ class CreatePayment extends Command
             $this->info('Не забудьте взять у клиента деньги');
         }
 
-        $payment = (new PaymentTerminal())->initializePaymentByMethod($order_id, $payment_type, $payer_account,);
-
-        if($payment){
-            try {
-                $payment->doPayment() ? $this->info('success') : $this->info('decline');
-            } catch (\Throwable $exception) {
-                $this->warn($exception->getMessage());
-            }
-        } else{
-            $this->warn('Not defined payment type:' . PHP_EOL . $payment_type);
+        try {
+            $payment = (new PaymentTerminal())->initializePaymentByMethod($order_id, $payment_type, $payer_account);
+            $payment->makePayment() ? $this->info('success') : $this->info('decline');
+        } catch (\Throwable $exception) {
+            $this->warn($exception->getMessage());
         }
     }
 }

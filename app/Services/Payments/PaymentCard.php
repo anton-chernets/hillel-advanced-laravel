@@ -13,7 +13,7 @@ class PaymentCard extends PaymentBase
         $this->type = self::TYPE_CARD;
     }
 
-    public function doPayment(): bool
+    public function makePayment(): bool
     {
         return (new PaymentTerminal())->createPayment($this);
     }

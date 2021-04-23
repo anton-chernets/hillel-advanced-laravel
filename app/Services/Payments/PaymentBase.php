@@ -23,5 +23,5 @@ abstract class PaymentBase
      * @return bool
      * @throws \Exception
      */
-    abstract public function doPayment(): bool;
+    abstract public function makePayment(): bool;
 }
