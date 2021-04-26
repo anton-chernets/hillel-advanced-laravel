@@ -31,7 +31,7 @@ return [
     ],
 
     'google' => [
-        'app_key' => env('GOOGLE_APIS_CUSTOM_SEARCH_APP_KEY'),
+        'app_key' => env('GOOGLE_APIS_CUSTOM_SEARCH_SYSTEM_ID'),
         'api_secret_key' => env('GOOGLE_APIS_CUSTOM_SEARCH_API_KEY'),
         'api_url' => env('GOOGLE_APIS_CUSTOM_SEARCH_URL'),
         'api_uri' => env('GOOGLE_APIS_CUSTOM_SEARCH_URI'),
