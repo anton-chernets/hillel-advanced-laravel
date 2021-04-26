@@ -18,6 +18,10 @@ php artisan orders:get-total-sum
 php artisan contractors:get-duplicated
 
 ```
+- command for check facade
+```
+php artisan php artisan search:total test
+```
 - API routes
 ```
 api/contractors/get-duplicated
