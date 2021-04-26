@@ -16,8 +16,8 @@ class GoogleAPI
 
     public function operation(): string
     {
-        $result = "Facade initializes subsystems with result search total:\n";
-        $result .= $this->searchSystem->getTotalSearchResults();
+        $result = 'Facade initializes subsystems with result:'. PHP_EOL;
+        $result .= 'search total=' . $this->searchSystem->getTotalSearchResults();
 
         return $result;
     }
