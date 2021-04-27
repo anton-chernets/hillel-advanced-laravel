@@ -4,7 +4,6 @@
 namespace App\Console\Commands;
 
 
-use App\Services\Search\Google\CustomSearchAPI;
 use App\Services\Search\Google\GoogleAPI;
 use Illuminate\Console\Command;
 
@@ -27,13 +26,11 @@ class CheckFacade extends Command
     /**
      * Execute the console command.
      *
+     * @param GoogleAPI $googleApisFacade
      * @return void
      */
-    public function handle(): void
+    public function handle(GoogleAPI $googleApisFacade): void
     {
-        $googleSubsystem1 = new CustomSearchAPI($this->argument('request'));
-        $googleApisFacade = new GoogleAPI($googleSubsystem1);
-
-        $this->info($googleApisFacade->operation());
+        $this->info($googleApisFacade->operation($this->argument('request')));
     }
 }

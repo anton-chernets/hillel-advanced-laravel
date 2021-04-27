@@ -9,7 +9,7 @@ use GuzzleHttp\Psr7\Response;
 
 class CustomSearchAPI
 {
-    public $searchRequest;
+    public string $searchRequest = '';
     /**
      * @var Client
      */
@@ -18,13 +18,12 @@ class CustomSearchAPI
     protected $auth_key;
     protected $api_uri;
 
-    public function __construct($searchRequest)
+    public function __construct()
     {
         $this->client = new Client(['base_uri' => config('services.google.api_url')]);
         $this->app_key = config('services.google.app_key');
         $this->auth_key = config('services.google.api_secret_key');
         $this->api_uri = config('services.google.api_uri');
-        $this->searchRequest = $searchRequest;
     }
 
     public function getTotalSearchResults()
