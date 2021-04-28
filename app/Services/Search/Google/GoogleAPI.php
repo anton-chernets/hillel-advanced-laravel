@@ -4,6 +4,8 @@
 namespace App\Services\Search\Google;
 
 
+use App\Helpers\StringHelper;
+
 class GoogleAPI
 {
     protected CustomSearchAPI $searchSystem;
@@ -21,7 +23,7 @@ class GoogleAPI
     public function operation(string $searchRequest): string
     {
         $this->searchSystem->searchRequest = $searchRequest;
-        $result = 'Facade initializes subsystems with result:'. PHP_EOL;
+        $result = StringHelper::lineBreak('Facade initializes subsystems with result:');
         $result .= 'search total=' . $this->searchSystem->getTotalSearchResults();
 
         return $result;

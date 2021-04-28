@@ -20,7 +20,11 @@ php artisan contractors:get-duplicated
 ```
 - command for check facade
 ```
-php artisan php artisan search:total test
+php artisan search:total test
+```
+- command for json to xml convert and write to storage file
+```
+php artisan write:file
 ```
 - API routes
 ```

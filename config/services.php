@@ -37,4 +37,8 @@ return [
         'api_uri' => env('GOOGLE_APIS_CUSTOM_SEARCH_URI'),
     ],
 
+    'fake_json' => [
+        'api_url' => env('JSON_FAKE_DATA_API_URL'),
+    ]
+
 ];
