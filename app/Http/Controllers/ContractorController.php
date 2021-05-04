@@ -18,7 +18,35 @@ class ContractorController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
+     * @OA\Get(
+     *     path="/api/contractors/get-duplicated",
+     *     summary="Get duplicated contractors",
+     *     description="Display a listing of the resource.",
+     *     tags={"Contractors"},
+     *     @OA\Response(
+     *        response="200",
+     *        description="Successful response",
+     *        @OA\JsonContent(
+     *          type="object",
+     *          example={
+     *             "data": {
+     *                  {
+     *                      "id": 1,
+     *                      "name": "Hayley Reilly",
+     *                      "created_at": "2021-04-04T17:07:30.000000Z",
+     *                      "updated_at": "2021-04-04T17:07:30.000000Z"
+     *                  },
+     *                  {
+     *                      "id": 2,
+     *                      "name": "Hayley Reilly",
+     *                      "created_at": "2021-04-04T17:07:30.000000Z",
+     *                      "updated_at": "2021-04-04T17:07:30.000000Z"
+     *                  }
+     *              }
+     *          },
+     *      )
+     *   ),
+     * )
      */
     public function getDuplicated(): ContractorsCollection
     {
