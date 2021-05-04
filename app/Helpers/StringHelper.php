@@ -24,4 +24,13 @@ class StringHelper
     {
         return implode(' ', preg_split('/(?=[A-Z])/',$str));
     }
+
+    /**
+     * @param string $line
+     * @return string
+     */
+    public static function lineBreak(string $line): string
+    {
+        return $line . PHP_EOL;
+    }
 }

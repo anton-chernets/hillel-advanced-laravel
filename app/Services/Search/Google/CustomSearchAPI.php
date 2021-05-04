@@ -4,6 +4,8 @@
 namespace App\Services\Search\Google;
 
 
+use App\Services\DataOperation\DataConverter;
+use App\Services\FakeData\JsonData;
 use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\Response;
 
@@ -31,19 +33,19 @@ class CustomSearchAPI
         return $this->getResponseSearchInformation()['totalResults'];
     }
 
-    private function getResponseSearchInformation()
+    private function getResponseSearchInformation(): array
     {
         return $this->searchContentsArray()['searchInformation'];
     }
 
-    private function searchContentsArray()
+    private function searchContentsArray(): array
     {
-        return json_decode($this->getSearchContents(), true);
+        return (new DataConverter())->jsonToArray($this->getSearchContents());
     }
 
     private function getSearchContents(): string
     {
-        return $this->getSearchResponse()->getBody()->getContents();
+        return (new JsonData())->getResponseContents($this->getSearchResponse());
     }
 
     private function getSearchResponse(): Response
