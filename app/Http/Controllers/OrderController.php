@@ -27,27 +27,20 @@ class OrderController extends Controller
      *        response="200",
      *        description="Successful response",
      *        @OA\JsonContent(
-     *          type="object",
-     *          example={
-     *             "data": {
-     *                  {
-     *                      "id": 9,
-     *                      "id_products": "[3]",
-     *                      "contractor_id": 4,
-     *                      "sum": 9957,
-     *                      "created_at": "2021-04-04T17:07:30.000000Z",
-     *                      "updated_at": "2021-04-04T17:07:30.000000Z"
-     *                  },
-     *                  {
-     *                      "id": 20,
-     *                      "id_products": "[2]",
-     *                      "contractor_id": 6,
-     *                      "sum": 7382,
-     *                      "created_at": "2021-04-04T17:07:30.000000Z",
-     *                      "updated_at": "2021-04-04T17:07:30.000000Z"
-     *                  }
-     *              }
-     *          },
+     *          @OA\Property(
+     *              property="data",
+     *              type="array",
+     *              @OA\Items(
+     *                  type="object",
+     *                  format="query",
+     *                  @OA\Property(property="id", type="integer", example=9),
+     *                  @OA\Property(property="id_products", type="string", example="[3]"),
+     *                  @OA\Property(property="contractor_id", type="integer", example=4),
+     *                  @OA\Property(property="sum", type="integer", example=9957),
+     *                  @OA\Property(property="created_at", type="string", example="2021-04-04T17:07:30.000000Z"),
+     *                  @OA\Property(property="updated_at", type="string", example="2021-04-04T17:07:30.000000Z"),
+     *              ),
+     *          ),
      *      )
      *   ),
      * )
@@ -67,27 +60,20 @@ class OrderController extends Controller
      *        response="200",
      *        description="Successful response",
      *        @OA\JsonContent(
-     *          type="object",
-     *          example={
-     *             "data":  {
-     *                  {
-     *                      "id": 4,
-     *                      "id_products": "[1]",
-     *                      "contractor_id": 1,
-     *                      "sum": 6108,
-     *                      "created_at": "2021-04-04T17:07:30.000000Z",
-     *                      "updated_at": "2021-04-04T17:07:30.000000Z"
-     *                  },
-     *                  {
-     *                      "id": 8,
-     *                      "id_products": "[1, 3]",
-     *                      "contractor_id": 1,
-     *                      "sum": 6180,
-     *                      "created_at": "2021-04-04T17:07:30.000000Z",
-     *                      "updated_at": "2021-04-04T17:07:30.000000Z"
-     *                  }
-     *              }
-     *          },
+     *          @OA\Property(
+     *              property="data",
+     *              type="array",
+     *              @OA\Items(
+     *                  type="object",
+     *                  format="query",
+     *                  @OA\Property(property="id", type="integer", example=4),
+     *                  @OA\Property(property="id_products", type="string", example="[1]"),
+     *                  @OA\Property(property="contractor_id", type="integer", example=1),
+     *                  @OA\Property(property="sum", type="integer", example=6108),
+     *                  @OA\Property(property="created_at", type="string", example="2021-04-04T17:07:30.000000Z"),
+     *                  @OA\Property(property="updated_at", type="string", example="2021-04-04T17:07:30.000000Z"),
+     *              ),
+     *          ),
      *      )
      *   ),
      * )
@@ -108,12 +94,11 @@ class OrderController extends Controller
      *        response="200",
      *        description="Successful response",
      *        @OA\JsonContent(
-     *          type="object",
-     *          example={
-     *             "data":  {
-     *                  "total_sum": 517032
-     *              }
-     *          },
+     *          @OA\Property(
+     *              property="data",
+     *              type="object",
+     *              @OA\Property(property="total_sum", type="integer", example=517032),
+     *          ),
      *      )
      *   ),
      * )

@@ -27,23 +27,18 @@ class ContractorController extends Controller
      *        response="200",
      *        description="Successful response",
      *        @OA\JsonContent(
-     *          type="object",
-     *          example={
-     *             "data": {
-     *                  {
-     *                      "id": 1,
-     *                      "name": "Hayley Reilly",
-     *                      "created_at": "2021-04-04T17:07:30.000000Z",
-     *                      "updated_at": "2021-04-04T17:07:30.000000Z"
-     *                  },
-     *                  {
-     *                      "id": 2,
-     *                      "name": "Hayley Reilly",
-     *                      "created_at": "2021-04-04T17:07:30.000000Z",
-     *                      "updated_at": "2021-04-04T17:07:30.000000Z"
-     *                  }
-     *              }
-     *          },
+     *          @OA\Property(
+     *              property="data",
+     *              type="array",
+     *              @OA\Items(
+     *                  type="object",
+     *                  format="query",
+     *                  @OA\Property(property="id", type="integer", example=1),
+     *                  @OA\Property(property="name", type="string", example="Hayley Reilly"),
+     *                  @OA\Property(property="created_at", type="string", example="2021-04-04T17:07:30.000000Z"),
+     *                  @OA\Property(property="updated_at", type="string", example="2021-04-04T17:07:30.000000Z"),
+     *              ),
+     *          ),
      *      )
      *   ),
      * )
