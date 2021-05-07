@@ -9,5 +9,13 @@ use Illuminate\Routing\Controller as BaseController;
 
 class Controller extends BaseController
 {
+    /**
+     * @OA\Info(
+     *      version="1.0.0",
+     *      title="L5 OpenApi",
+     *      description="L5 Swagger OpenApi description"
+     * )
+     *
+     */
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 }
